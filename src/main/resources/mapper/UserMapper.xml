@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.User">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="bjs_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="bjs_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+  </resultMap>
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from user
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByToken" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from user
+    where token = #{token,jdbcType=VARCHAR}
+  </select>
+
+</mapper>
