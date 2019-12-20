@@ -101,7 +101,19 @@ public class UserController {
 
             return result;
         }
-
-
     }
+
+    @GetMapping("/all_user")
+    public Result getUserList() {
+        List<User> users = userService.getUserList();
+
+        return ResultGenerator.genSuccessResult(users);
+    }
+
+    @PostMapping("/update_role")
+    public Result updateRole(@RequestParam String name) {
+        User user = userService.updateRoleByName(name);
+        return ResultGenerator.genSuccessResult();
+    }
+
 }

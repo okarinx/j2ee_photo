@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -41,5 +43,20 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     public User getUserByToken(String token) {
         return userMapper.selectByToken(token);
+    }
+
+    @Override
+    public List<User> getUserList(){
+        List<User> users= new ArrayList<>();
+        users=userMapper.selectUserList();
+        return users;
+    }
+
+    @Override
+    public User updateRoleByName(String name) {
+        User user = userMapper.selectByName(name);
+        user.setRole("admin");
+        userMapper.updateByPrimaryKey(user);
+        return user;
     }
 }

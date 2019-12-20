@@ -13,6 +13,7 @@
     <result column="bjs_modify" jdbcType="TIMESTAMP" property="gmtModify" />
   </resultMap>
 
+
   <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select *
     from user
@@ -23,6 +24,11 @@
     select *
     from user
     where token = #{token,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectUserList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select name,role,bjs_create,bjs_modify
+    from user
   </select>
 
 </mapper>
