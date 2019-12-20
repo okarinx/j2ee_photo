@@ -111,8 +111,8 @@ public class UserController {
     }
 
     @PostMapping("/update_role")
-    public Result updateRole(@RequestParam String name) {
-        User user = userService.updateRoleByName(name);
+    public Result updateRole(@RequestParam String name, @RequestParam String operator) {
+        User user = userService.updateRoleByName(name, operator);
         return ResultGenerator.genSuccessResult();
     }
 

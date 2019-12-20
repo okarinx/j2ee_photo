@@ -1,6 +1,8 @@
 package com.company.project.service.impl;
 
+import com.company.project.dao.ModifyUserMapper;
 import com.company.project.dao.UserMapper;
+import com.company.project.model.ModifyUser;
 import com.company.project.model.User;
 import com.company.project.service.UserService;
 import com.company.project.core.AbstractService;
@@ -22,6 +24,8 @@ import java.util.UUID;
 public class UserServiceImpl extends AbstractService<User> implements UserService {
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private ModifyUserMapper modifyUserMapper;
 
     @Override
     public User getUserByName(String name) {
@@ -53,10 +57,18 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     }
 
     @Override
-    public User updateRoleByName(String name) {
+    public User updateRoleByName(String name,String operator) {
         User user = userMapper.selectByName(name);
         user.setRole("admin");
         userMapper.updateByPrimaryKey(user);
+        ModifyUser modifyUser = new ModifyUser();
+        modifyUser.setBjsOperate(new Date());
+        // 设置被修改用户的ID
+        modifyUser.setModifyUserId(name);
+        // 设置操作者ID
+        modifyUser.setUserId(operator);
+        modifyUser.setOperation("提升权限至admin");
+        modifyUserMapper.insert(modifyUser);
         return user;
     }
 }

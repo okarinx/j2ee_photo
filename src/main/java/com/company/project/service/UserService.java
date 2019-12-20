@@ -13,5 +13,5 @@ public interface UserService extends Service<User> {
     String updateTokenByName(String name);
     User getUserByToken(String token);
     List<User> getUserList();
-    User updateRoleByName(String name);
+    User updateRoleByName(String name,String operator);
 }
