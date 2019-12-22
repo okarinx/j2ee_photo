@@ -14,4 +14,6 @@ public interface PhotoService extends Service<Photo> {
     PhotoDetail getPhotoDetail(int id,String name);
     List<SortItem> getCountryList();
     List<SortItem> getScaleList();
+    int getLastId();
+    List<Photo> getFavorPhotoList(String username);
 }

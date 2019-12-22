@@ -10,4 +10,6 @@ public interface PhotoMapper extends Mapper<Photo> {
     PhotoDetail getPhotoDetail(int id,String name);
     String[] selectCountry();
     String[] selectScale();
+    int selectLastId();
+    List<Photo> selectFavorPhotoList(String username);
 }

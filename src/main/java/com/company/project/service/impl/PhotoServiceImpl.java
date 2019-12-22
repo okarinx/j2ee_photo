@@ -73,4 +73,13 @@ public class PhotoServiceImpl extends AbstractService<Photo> implements PhotoSer
         }
     }
 
+    @Override
+    public int getLastId() {
+        return photoMapper.selectLastId();
+    }
+
+    @Override
+    public List<Photo> getFavorPhotoList(String username){
+        return photoMapper.selectFavorPhotoList(username);
+    }
 }

@@ -19,4 +19,19 @@ public class FavorsServiceImpl extends AbstractService<Favors> implements Favors
     @Resource
     private FavorsMapper favorsMapper;
 
+    @Override
+    public String setFavors(String username,int photoId) {
+        Favors favors = new Favors();
+        favors.setUserName(username);
+        favors.setPhotoId(photoId);
+
+        if(favorsMapper.selectOne(favors)!=null){
+            favorsMapper.delete(favors);
+            return "取消收藏";
+        }else{
+            favorsMapper.insert(favors);
+            return "增加收藏";
+        }
+    }
+
 }

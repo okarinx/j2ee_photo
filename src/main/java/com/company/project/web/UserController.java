@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,12 +62,12 @@ public class UserController {
         String username = request.getString("username");
         String password = request.getString("password");
         User user = userService.getUserByName(username);
-
         if (user == null) {
             return ResultGenerator.genFailResult("用户不存在");
         } else if (!password.equals(user.getPassword())) {
             return ResultGenerator.genFailResult("密码错误");
         } else {
+            // 生成token
             String token = userService.updateTokenByName(username);
             JSONObject resData = new JSONObject();
             Result result = new Result();
@@ -114,6 +115,24 @@ public class UserController {
     public Result updateRole(@RequestParam String name, @RequestParam String operator) {
         User user = userService.updateRoleByName(name, operator);
         return ResultGenerator.genSuccessResult();
+    }
+
+    @PostMapping("/register")
+    public Result register(@RequestParam String name, @RequestParam String password) {
+        if(userService.getUserByName(name)!=null){
+            return new Result()
+                    .setCode(ResultCode.FAIL)
+                    .setMessage("用户名重复");
+        }else{
+            User user=new User();
+            user.setName(name);
+            user.setRole("editor");
+            user.setGmtModify(new Date());
+            user.setGmtCreate(new Date());
+            user.setPassword(password);
+            userService.save(user);
+            return ResultGenerator.genSuccessResult();
+        }
     }
 
 }

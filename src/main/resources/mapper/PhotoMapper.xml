@@ -16,6 +16,7 @@
         <result column="scale" jdbcType="VARCHAR" property="scale"/>
     </resultMap>
 
+
     <select id="selectCountry" parameterType="java.lang.String" resultType="java.lang.String">
     SELECT country
     FROM photo
@@ -27,5 +28,18 @@
     FROM photo
     WHERE scale NOT LIKE 'undefined' AND scale NOT LIKE 'null'
     GROUP BY scale;
+  </select>
+
+    <select id="selectLastId"  resultType="java.lang.Integer">
+    SELECT id
+    FROM photo
+    ORDER BY id DESC
+	LIMIT 1;
+  </select>
+
+    <select id="selectFavorPhotoList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT photo.id,photo.display_name,photo.file_url,photo.country,photo.position,photo.uploader_name,photo.bjs_take_photo,photo.coordinates,photo.scale
+    FROM photo JOIN favors ON photo.id = favors.photo_id
+    where favors.user_name=#{username,jdbcType=VARCHAR};
   </select>
 </mapper>

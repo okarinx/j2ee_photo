@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.ModifyPhotoMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.ModifyPhoto">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="photo_id" jdbcType="INTEGER" property="photoId" />
+    <result column="operation" jdbcType="VARCHAR" property="operation" />
+    <result column="bjs_operate" jdbcType="TIMESTAMP" property="bjsOperate" />
+  </resultMap>
+</mapper>
